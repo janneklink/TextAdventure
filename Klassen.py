@@ -93,7 +93,7 @@ class Monster:
         pass
 
     def bewegen(self):
-        richtung = rd.random in Karte.richtungen
+        richtung = Karte.richtungen[rd.randint(0, 3)]
         bewegunsrichtung = Karte.richtungen[richtung]
         neuerStandort = (
             self.standort[0] + bewegunsrichtung[0],
@@ -107,7 +107,7 @@ class Monster:
 
 class Zombie(Monster):
     def __init__(self, leben, geschicklichkeit, staerke):
-        super(Zombie, self).__init__(leben, geschicklichkeit, staerke, 1.5)
+        super(Zombie, self).__init__(leben, geschicklichkeit, staerke, 1)
 
 
 class NPC:
