@@ -14,7 +14,7 @@ def main():
         zombie = zombie_erstellen()
         monster =[zombie]
         for monster in monster:
-            monster.standort = monster.bewegen
+            monster.standort = monster.bewegen()
             if monster.standort == spieler.standort:
                 spieler.kaempfen(monster)
         if spieler.leben < spieler.maximalesleben:
@@ -42,13 +42,13 @@ def main():
                 if spieler.lebend <= 0:
                     break
             vorherigerstandort = spieler.standort
-            spieler.standort = spieler.bewegen
-            print("Du bist jetzt: ", spieler.wo())
+            spieler.standort = spieler.bewegen(aktuelleRichtung)
+            print("Du bist jetzt: ", (spieler.wo().name))
 
             bleiben = spieler.wo().verhalten(spieler)
             if bleiben is True:
                 spieler.standort = vorherigerstandort
-                print("Dein Standort ist:",spieler.wo().name)
+                print("Dein Standort ist:",(spieler.wo().name))
             else:
                 pass
 

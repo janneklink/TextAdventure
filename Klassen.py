@@ -73,14 +73,12 @@ class Spieler:
             return self.standort
 
     def wo(self):
-        """
-
-        """
-        return Karte.karte[self.standort[0]][self.standort[1]]
+        ort = Karte.karte[self.standort[0]][self.standort[1]]
+        return ort
 
 
 class Monster:
-    def __init__(self, leben, geschicklichkeit, staerke, ruestung=0):
+    def __init__(self, leben, geschicklichkeit, staerke, ruestung = 0):
         self.leben = leben
         self.geschicklichkeit = geschicklichkeit
         self.ruestung = ruestung
@@ -93,7 +91,7 @@ class Monster:
         pass
 
     def bewegen(self):
-        richtung = Karte.richtungen[rd.randint(0, 3)]
+        richtung = fk.zufaellige_richtung()
         bewegunsrichtung = Karte.richtungen[richtung]
         neuerStandort = (
             self.standort[0] + bewegunsrichtung[0],
