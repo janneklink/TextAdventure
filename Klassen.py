@@ -48,8 +48,10 @@ class Spieler:
                 gegner.leben -= self.angriffschaden
 
         if gegner.leben <= 0:
-            gegner.sterben()
+            gegnerexsistenz =gegner.sterben()
             print("Du hast gewonnen!")
+            return gegnerexsistenz
+
 
         if self.leben <= 0:
             self.sterben(4)
@@ -88,7 +90,7 @@ class Monster:
                          rd.randint(Karte.KoordinatenGrenze[0], Karte.KoordinatenGrenze[1]))
 
     def sterben(self):
-        pass
+        return False
 
     def bewegen(self):
         richtung = fk.zufaellige_richtung()

@@ -1,6 +1,7 @@
 
 from Erstellen import spieler_erstellen,zombie_erstellen
 import Funktionen as fk
+import random as rd
 
 
 
@@ -12,11 +13,15 @@ def main():
         eingabe = input("Was willst du tun?")
         eingabe = fk.text_anpassen(eingabe)
         zombie = zombie_erstellen()
-        monster =[zombie]
-        for monster in monster:
+        monsterliste =[zombie]
+        if rd.randint(0,4) == 4:
+            monsterliste.append(zombie_erstellen())
+        for monster in monsterliste:
             monster.standort = monster.bewegen()
             if monster.standort == spieler.standort:
-                spieler.kaempfen(monster)
+                monsterexistenz = spieler.kaempfen(monster)
+                if monsterexistenz is False:
+                    monsterliste.remove(monster)
         if spieler.leben < spieler.maximalesleben:
             spieler.leben += 2
 
