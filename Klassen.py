@@ -64,7 +64,7 @@ class Spieler:
                 self.standort[0] + bewegunsrichtung[0],
                 self.standort[1] + bewegunsrichtung[1])
 
-            if fk.ob_in_karte(self.standort, Karte.KoordinatenGrenze) is True:
+            if fk.ob_in_karte(neuerStandort, Karte.KoordinatenGrenze) is True:
                 neuerStandort = self.standort
                 print("du Hast den Rand der Karte erreichst und kannst nicht mehr weitergehen")
 
@@ -99,7 +99,7 @@ class Monster:
             self.standort[0] + bewegunsrichtung[0],
             self.standort[1] + bewegunsrichtung[1])
 
-        if fk.ob_in_karte(self.standort, Karte.KoordinatenGrenze) is True:
+        if fk.ob_in_karte(neuerStandort, Karte.KoordinatenGrenze) is True:
             neuerStandort = self.standort
 
         return neuerStandort

@@ -14,7 +14,8 @@ def main():
         eingabe = fk.text_anpassen(eingabe)
         zombie = zombie_erstellen()
         monsterliste =[zombie]
-        if rd.randint(0,4) == 4:
+        monsterentstehung = rd.randint(0, 4)
+        if monsterentstehung == 4:
             monsterliste.append(zombie_erstellen())
         for monster in monsterliste:
             monster.standort = monster.bewegen()
@@ -42,7 +43,7 @@ def main():
 
             if aktuelleRichtung == "himmel" or aktuelleRichtung == "hoelle":
 
-                spieler.sterben(0, spieler.name)
+                spieler.sterben(0)
 
                 if spieler.lebend <= 0:
                     break
@@ -57,15 +58,22 @@ def main():
             else:
                 pass
 
-        if eingabe == "stop":
-            print("Auf Wiedersehen.")
-            break
+        if eingabe.startswith("stop"):
+            beenden = fk.ja_nein_frage("Moechtest du das Spiel wirklich verlassen?")
+            if beenden is True:
+                print("Auf Wiedersehen.")
+                break
 
-        if eingabe == "wo":
+        if eingabe.startswith("wo"):
             print(spieler.wo().name)
             print(spieler.wo().beschreibung)
 
-
+        if eingabe.startswith("help"):
+            print(
+                "Du kannst gehen, indem du 'gehen' und danach die Himmelsrichtung,in welche du gehen willst, schreibst.")
+            print("Mit dem Befehl 'wo' erfaerst du wo du bist.")
+            print(
+                "Und wenn du das Spiel verlassen moechtest schreibe einfach, wenn du gefragt wirst was du tun willst, 'stop'.")
 
 if __name__ == "__main__":
     spieler = spieler_erstellen()
