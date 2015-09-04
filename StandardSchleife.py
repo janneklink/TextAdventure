@@ -12,23 +12,9 @@ def main():
             break
         eingabe = input("Was willst du tun?")
         eingabe = fk.text_anpassen(eingabe)
-        zombie = zombie_erstellen()
-        monsterliste =[zombie]
-        monsterentstehung = rd.randint(0, 4)
-        if monsterentstehung == 4:
-            monsterliste.append(zombie_erstellen())
-        for monster in monsterliste:
-            monster.standort = monster.bewegen()
-            if monster.standort == spieler.standort:
-                monsterexistenz = spieler.kaempfen(monster)
-                if monsterexistenz is False:
-                    monsterliste.remove(monster)
+
         if spieler.leben < spieler.maximalesleben:
             spieler.leben += 2
-
-#        if eingabe == "kaempfen" :
-#            monster = zombie_erstellen()
-#            spieler.kaempfen(monster)
 
         if eingabe.startswith("gehen"):
 
@@ -74,6 +60,18 @@ def main():
             print("Mit dem Befehl 'wo' erfaerst du wo du bist.")
             print(
                 "Und wenn du das Spiel verlassen moechtest schreibe einfach, wenn du gefragt wirst was du tun willst, 'stop'.")
+
+        zombie = zombie_erstellen()
+        monsterliste = [zombie]
+        monsterentstehung = rd.randint(0, 4)
+        if monsterentstehung == 4:
+            monsterliste.append(zombie_erstellen())
+        for monster in monsterliste:
+            monster.standort = monster.bewegen()
+            if monster.standort == spieler.standort:
+                print(
+                    "Plötzlich taucht ein Gestalt auf welche auf dich zugerannt kommt und anfängt dich zu attackieren.")
+                spieler.kaempfen(monster, monsterliste)
 
 if __name__ == "__main__":
     spieler = spieler_erstellen()

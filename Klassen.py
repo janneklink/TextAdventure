@@ -33,7 +33,7 @@ class Spieler:
         else:
             return False
 
-    def kaempfen(self, gegner):
+    def kaempfen(self, gegner, gegnerexistenz):
 
         while gegner.leben > 0 and self.leben > 0:
             print("Du hast", int(self.leben), "Leben.")
@@ -48,9 +48,9 @@ class Spieler:
                 gegner.leben -= self.angriffschaden
 
         if gegner.leben <= 0:
-            gegnerexsistenz =gegner.sterben()
             print("Du hast gewonnen!")
-            return gegnerexsistenz
+            gegner.sterben(gegnerexistenz)
+            return True
 
 
         if self.leben <= 0:
@@ -89,8 +89,9 @@ class Monster:
         self.standort = (rd.randint(Karte.KoordinatenGrenze[0], Karte.KoordinatenGrenze[1]),
                          rd.randint(Karte.KoordinatenGrenze[0], Karte.KoordinatenGrenze[1]))
 
-    def sterben(self):
-        return False
+    def sterben(self, existenz):
+        existenz.remove(self)
+        pass
 
     def bewegen(self):
         richtung = fk.zufaellige_richtung()
