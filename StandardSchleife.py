@@ -12,7 +12,8 @@ def main():
             break
         eingabe = input("Was willst du tun?")
         eingabe = fk.text_anpassen(eingabe)
-
+        zombie = zombie_erstellen()
+        monsterliste = [zombie]
         if spieler.leben < spieler.maximalesleben:
             spieler.leben += 2
 
@@ -44,6 +45,17 @@ def main():
             else:
                 pass
 
+            monsterentstehung = rd.randint(0, 4)
+            if monsterentstehung == 4:
+                monsterliste.append(zombie_erstellen())
+            for monster in monsterliste:
+                monster.standort = monster.bewegen()
+                if monster.standort == spieler.standort:
+                    print(
+                    "Plötzlich taucht ein Gestalt auf welche auf dich zugerannt kommt und anfängt dich zu attackieren.")
+                    spieler.kaempfen(monster, monsterliste)
+
+
         if eingabe.startswith("stop"):
             beenden = fk.ja_nein_frage("Moechtest du das Spiel wirklich verlassen?")
             if beenden is True:
@@ -61,17 +73,7 @@ def main():
             print(
                 "Und wenn du das Spiel verlassen moechtest schreibe einfach, wenn du gefragt wirst was du tun willst, 'stop'.")
 
-        zombie = zombie_erstellen()
-        monsterliste = [zombie]
-        monsterentstehung = rd.randint(0, 4)
-        if monsterentstehung == 4:
-            monsterliste.append(zombie_erstellen())
-        for monster in monsterliste:
-            monster.standort = monster.bewegen()
-            if monster.standort == spieler.standort:
-                print(
-                    "Plötzlich taucht ein Gestalt auf welche auf dich zugerannt kommt und anfängt dich zu attackieren.")
-                spieler.kaempfen(monster, monsterliste)
+
 
 if __name__ == "__main__":
     spieler = spieler_erstellen()
