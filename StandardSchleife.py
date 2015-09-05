@@ -46,13 +46,14 @@ def main():
                 pass
 
             monsterentstehung = rd.randint(0, 4)
-            if monsterentstehung == 4:
+            if monsterentstehung <= 4:
                 monsterliste.append(zombie_erstellen())
             for monster in monsterliste:
                 monster.standort = monster.bewegen()
+                print(monsterliste.index(monster))
                 if monster.standort == spieler.standort:
                     print(
-                    "Plötzlich taucht ein Gestalt auf welche auf dich zugerannt kommt und anfängt dich zu attackieren.")
+                    "Plötzlich taucht ein Gestalt auf, welche auf dich zugerannt kommt und anfängt dich zu attackieren.")
                     spieler.kaempfen(monster, monsterliste)
 
 
