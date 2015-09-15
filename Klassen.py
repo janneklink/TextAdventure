@@ -21,6 +21,7 @@ class Spieler:
         self.ruestung = 0
         self.maximalesleben = 30
         self.standort = (4, 3)
+        self.erschoepfung = 0
 
     def sterben(self, todesnachricht):
         print(self.name, todesnachrichten[todesnachricht])
@@ -28,7 +29,14 @@ class Spieler:
 
     def fortschreiten(self, schwierigkeit, gefahrenfaktor):
         entscheidendeNr = rd.randint(self.geschicklichkeit, schwierigkeit)
-        if entscheidendeNr > (schwierigkeit * (gefahrenfaktor)):
+        if entscheidendeNr > (schwierigkeit + self.erschoepfung * (gefahrenfaktor)):
+            return True
+        else:
+            return False
+
+    def schwimmen(self, strecke):
+        entscheidendeNr = rd.randint(self.geschicklichkeit, strecke)
+        if entscheidendeNr > (strecke * ()):
             return True
         else:
             return False
@@ -50,8 +58,8 @@ class Spieler:
         if gegner.leben <= 0:
             print("Du hast gewonnen!")
             gegner.sterben(gegnerexistenz)
+            self.erschoepfung += 4
             return True
-
 
         if self.leben <= 0:
             self.sterben(4)
@@ -74,13 +82,20 @@ class Spieler:
             print("Es faellt mir schwer nach", richtung, " zu laufen. Moegliche Richtungen: nord, ost, sued, west")
             return self.standort
 
+        self.erschoepfung += 1
+
     def wo(self):
         ort = Karte.karte[self.standort[0]][self.standort[1]]
         return ort
 
+    def ausruhen(self, dauer):
+        while dauer > 0:
+            self.erschoepfung -= 1
+            dauer -= 1
+
 
 class Monster:
-    def __init__(self, leben, geschicklichkeit, staerke, ruestung = 0):
+    def __init__(self, leben, geschicklichkeit, staerke, name, ruestung=0):
         self.leben = leben
         self.geschicklichkeit = geschicklichkeit
         self.ruestung = ruestung
@@ -88,6 +103,10 @@ class Monster:
         self.angriffschaden = (self.geschicklichkeit * 0.03 + 3) * (self.staerke * 0.1 + 1)
         self.standort = (rd.randint(Karte.KoordinatenGrenze[0], Karte.KoordinatenGrenze[1]),
                          rd.randint(Karte.KoordinatenGrenze[0], Karte.KoordinatenGrenze[1]))
+        self.name = name
+
+    def __str__(self):
+        return self.name
 
     def sterben(self, existenz):
         existenz.remove(self)
@@ -107,8 +126,8 @@ class Monster:
 
 
 class Zombie(Monster):
-    def __init__(self, leben, geschicklichkeit, staerke):
-        super(Zombie, self).__init__(leben, geschicklichkeit, staerke, 1)
+    def __init__(self, leben, geschicklichkeit, staerke, name):
+        super(Zombie, self).__init__(leben, geschicklichkeit, staerke, name, 1)
 
 
 class NPC:

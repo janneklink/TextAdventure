@@ -12,8 +12,7 @@ def main():
             break
         eingabe = input("Was willst du tun?")
         eingabe = fk.text_anpassen(eingabe)
-        zombie = zombie_erstellen()
-        monsterliste = [zombie]
+        monsterliste = []
         if spieler.leben < spieler.maximalesleben:
             spieler.leben += 2
 
@@ -47,7 +46,7 @@ def main():
 
             monsterentstehung = rd.randint(0, 4)
             if monsterentstehung <= 4:
-                monsterliste.append(zombie_erstellen())
+                monsterliste.append(zombie_erstellen(monsterliste.__len__()))
             for monster in monsterliste:
                 monster.standort = monster.bewegen()
                 print(monsterliste.index(monster))

@@ -76,6 +76,22 @@ class Moor(EinfacherOrt):
             print ("Du kehrst um, weil du nicht riskieren moechtest vom Moor verschluckt zu werden")
             return True
 
+class Fluss(EinfacherOrt):
+    def __init__(self):
+        super(Wald, self).__init__()
+
+    def verhalten(self, spieler):
+        durchqueren = fk.ja_nein_frage("Moechtest du durch den reißenden Fluss schwimmen?")
+        if durchqueren is True:
+            erfolg = spieler.fortschreiten(50, 1/2)
+            if erfolg is True:
+                spieler.geschicklichkeit +=2
+                print ("")
+            elif erfolg is False:
+                spieler.sterben(3)
+        if durchqueren is False:
+            print ("Du kehrst um, weil du nicht riskieren moechtest vom Moor verschluckt zu werden")
+            return True
 
                 # osten
 
