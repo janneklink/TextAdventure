@@ -13,7 +13,7 @@ def ja_nein_frage(frage):
     elif antwort =="nein":
         return False
     else :
-        print("Bitte antworte mit ja oder nein.")
+        print("Bitte antworte mit ja oder nein!")
         return ja_nein_frage(frage)
 
 def ob_in_karte(standort,kartengrenze):
