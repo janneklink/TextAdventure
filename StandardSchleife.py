@@ -46,7 +46,7 @@ def main():
 
             monsterentstehung = rd.randint(0, 4)
             if monsterentstehung <= 4:
-                monsterliste.append(zombie_erstellen(monsterliste.__len__()))
+                monsterliste.append(((zombie_erstellen(monsterliste.__len__())).name)())
             for monster in monsterliste:
                 monster.standort = monster.bewegen()
                 print(monsterliste.index(monster))
